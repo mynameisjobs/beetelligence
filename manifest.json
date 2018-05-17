@@ -1,0 +1,41 @@
+{
+  "name": "BeeCheaper",
+  "version": "1.0",
+  "description": "Seach products in honestBee for cheaper price!",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "http://localhost:3002/"
+  ],
+  "background": {
+    "scripts": [
+      "backgroundConfigs.js",
+      "backgroundUtils.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_title": "beeCheaper",
+    "default_icon": {
+      "16": "images/bee.png",
+      "32": "images/bee.png",
+      "48": "images/bee.png",
+      "128": "images/bee.png"
+    }
+  },
+  "icons": {
+      "16": "images/bee.png",
+      "32": "images/bee.png",
+      "48": "images/bee.png",
+      "128": "images/bee.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://example.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://www.food123.com.tw/"
+    ]
+  }
+}
