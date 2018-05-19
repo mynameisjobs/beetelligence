@@ -26,17 +26,25 @@
       "128": "images/bee.png"
     }
   },
-  "content_scripts": [{
-    "matches": ["https://www.food123.com.tw/*"],
-    "js": [
-      "backgroundQueryTerm.js"
-    ]
-  }],
+  "content_scripts": [
+    {
+      "matches": ["https://www.food123.com.tw/*"],
+      "js": [
+        "backgroundQueryTerm.js"
+      ]
+    },
+    {
+      "matches": ["https://www.happy-shopping.tw/*"],
+      "js": [
+        "backgroundQueryTermHappyShopping.js"
+      ]
+    }
+  ],
   "icons": {
-      "16": "images/bee.png",
-      "32": "images/bee.png",
-      "48": "images/bee.png",
-      "128": "images/bee.png"
+    "16": "images/bee.png",
+    "32": "images/bee.png",
+    "48": "images/bee.png",
+    "128": "images/bee.png"
   },
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://example.com; object-src 'self'",
