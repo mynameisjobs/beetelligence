@@ -12,6 +12,14 @@
     const VIEW_ID = 'my-view-script';
     const PARSER_ID = 'my-parser-script';
 
+    function injectExtensionID() {
+      const id = chrome.runtime.id;
+
+      const s = document.createElement('script');
+      s.innerHTML = 'window.beecheaperID = "' + id + '"';
+      document.body.appendChild(s);
+    }
+
     function isAppendedBefore(id) {
       return document.querySelectorAll(`#${id}`).length !== 0;
     }
@@ -34,6 +42,8 @@
     function removeJS(id) {
       document.getElementById(id).remove();
     }
+
+    injectExtensionID()
 
     isAppendedBefore(VIEW_ID)
       ? null

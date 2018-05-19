@@ -29,6 +29,19 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   if(msg.action === 'getConfigs') {
     sendResponse({ REMOTE_SERVER, PARSER_DICT })
   }
+
+  if(msg.action === 'postSearchTerm') {
+    const request = MyRequest('/searchterms');
+    const search_term = msg.searchTerm;
+
+    chrome.storage.sync.get('user_id', function(data) {
+      request.send({ user_id: data.user_id, search_term }, (res) => {
+        sendResponse({ response: 'ok' })
+      })
+    })
+
+    return true;
+  }
 })
 
 chrome.runtime.onMessageExternal.addListener(function(msg, sender, sendResponse) {
@@ -41,8 +54,9 @@ chrome.runtime.onMessageExternal.addListener(function(msg, sender, sendResponse)
     })
     return true;
   }
+
   if(msg.action === 'postData') {
-    const request = MyRequest('/competitor_prices');
+    const request = MyRequest('/competitors');
     const data = msg.data;
 
     getLocation().then(position => {

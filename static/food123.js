@@ -1,5 +1,6 @@
 (function() {
-  const extension_id = 'jagbamlhmfmhepenohcecakjnglojfal';
+  //const extension_id = 'jagbamlhmfmhepenohcecakjnglojfal';
+  const extension_id = window.beecheaperID;
 
   function parseData() {
     const now = new Date();
