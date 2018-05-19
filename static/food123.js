@@ -1,4 +1,4 @@
-(function() {
+function run() {
   //const extension_id = 'jagbamlhmfmhepenohcecakjnglojfal';
   const extension_id = window.beecheaperID;
 
@@ -44,4 +44,10 @@
     view.render();
   })
  
-})();
+}
+
+try {
+  run()
+}catch(e) {
+  setTimeout(run, 1000)
+}

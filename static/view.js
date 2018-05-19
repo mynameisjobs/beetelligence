@@ -3,6 +3,9 @@ const view = (function() {
   let _container = null;
 
   function init() {
+    if(_container) {
+      remove();
+    }
     _container = document.createElement('div');
     _container.style.height = '210px';
     _container.style.width = '100%';

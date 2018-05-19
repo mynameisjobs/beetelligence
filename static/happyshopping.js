@@ -1,5 +1,4 @@
-(function() {
-  //const extension_id = 'jagbamlhmfmhepenohcecakjnglojfal';
+function run() {
   const extension_id = window.beecheaperID;
 
   function parseData() {
@@ -40,5 +39,10 @@
     view.set(response.data);
     view.render();
   })
- 
-})();
+};
+
+try {
+  run()
+}catch(e) {
+  setTimeout(run, 1000)
+}
