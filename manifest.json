@@ -27,7 +27,7 @@
     }
   },
   "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
+    "matches": ["https://food123.com.tw/"],
     "js": [
       "backgroundQueryTerm.js"
     ]

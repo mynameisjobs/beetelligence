@@ -22,12 +22,10 @@
 
       element.setAttribute("id", id);
       if(id === VIEW_ID) {
-	//element.setAttribute("src", `${REMOTE_SERVER}/static/view.js`);
-	element.setAttribute("src", 'http://localhost:3002/static/view.js');
+	element.setAttribute("src", `${REMOTE_SERVER}/static/view.js`);
       }
       if(id === PARSER_ID) {
-	//element.setAttribute("src", `${REMOTE_SERVER}/static/view.js`);
-	element.setAttribute("src", `http:\/\/localhost:3002/static/${PARSER_DICT[host]}`); 
+	element.setAttribute("src", `${REMOTE_SERVER}/static/${PARSER_DICT[host]}`); 
       }
 
       document.body.appendChild(element)

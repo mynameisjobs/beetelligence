@@ -29,7 +29,7 @@
     const updated_at = now.toISOString();
     const url = document.location.href.split('#')[0];
 
-    return [{ source, title, price, url, imageurl, updated_at }];
+    return { source, title, price, url, imageurl, updated_at };
   }
 
   const pageUrl = document.location.href;
