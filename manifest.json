@@ -1,6 +1,6 @@
 {
-  "name": "BeeCheaper2",
-  "version": "1.0",
+  "name": "BeeCheaper",
+  "version": "1.2",
   "description": "Seach products in honestBee for cheaper price!",
   "permissions": [
     "activeTab",
