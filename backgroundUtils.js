@@ -9,11 +9,11 @@ function MyRequest(path) {
   const httpRequest = new XMLHttpRequest();
 
   function send(data, callback) {
-    const qs = '?data=' + JSON.stringify(data);
-
     httpRequest.onreadystatechange = handleStateChange(callback);
-    httpRequest.open('GET', `${REMOTE_SERVER}${path}${qs}`);
-    httpRequest.send();
+    httpRequest.open('POST', `${REMOTE_SERVER}${path}`);
+    httpRequest.setRequestHeader('content-type', 'application/json');
+
+    httpRequest.send(JSON.stringify(data));
   }
 
   function handleStateChange(callback) {
@@ -29,3 +29,13 @@ function MyRequest(path) {
   }
 }
 
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      resolve({latitude, longitude});
+    });
+  })
+}

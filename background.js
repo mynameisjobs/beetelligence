@@ -1,7 +1,7 @@
 /*  global variables set in backgroundConfigs.js:
  *    SUPPORTED_HOSTS, REMOTE_SERVER, PARSER_DICT
  *  Usable functions from backgroundUtils.js: 
- *    uuidv4, MyRequest
+ *    uuidv4, MyRequest, getLocation
  */
 
 chrome.runtime.onInstalled.addListener(function() {
@@ -14,7 +14,9 @@ chrome.runtime.onInstalled.addListener(function() {
       conditions: SUPPORTED_HOSTS.map(host => 
         new chrome.declarativeContent.PageStateMatcher({ pageUrl: {hostEquals: host} })
       ),
-      actions: [new chrome.declarativeContent.ShowPageAction()]
+      actions: [
+        new chrome.declarativeContent.ShowPageAction(),
+      ]
     }]);
   });
 
@@ -40,15 +42,21 @@ chrome.runtime.onMessageExternal.addListener(function(msg, sender, sendResponse)
     return true;
   }
   if(msg.action === 'postData') {
-    const request = MyRequest('/collect');
+    const request = MyRequest('/competitor_prices');
     const data = msg.data;
-    
-    chrome.storage.sync.get('user_id', function(store) {
-      const dataWithID = data.map(x => ({ ...x, user_id: store.user_id }))
-      request.send(dataWithID, (res) => {
-        sendResponse({ data: JSON.parse(res.responseText) });
+
+    getLocation().then(position => {
+      chrome.storage.sync.get('user_id', function(store) {
+        const dataWithIDAndPosition = Array.isArray(data)
+          ? data.map(x => ({ ...x, ...position, user_id: store.user_id }))
+          : { ...data, ...position, user_id: store.user_id }
+
+        request.send(dataWithIDAndPosition, (res) => {
+          sendResponse({ data: JSON.parse(res.responseText) });
+        })
       })
     })
+
     return true;
   }
   return;
@@ -59,4 +67,3 @@ chrome.pageAction.onClicked.addListener((tab) => {
     file: 'fetchResources.js'
   })
 })
-

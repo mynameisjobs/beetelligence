@@ -6,4 +6,4 @@ const PARSER_DICT = {
   'www.food123.com.tw': 'food123.js',
 }
 
-const REMOTE_SERVER = 'http://localhost:3002';
+const REMOTE_SERVER = 'https://mitjobs.ianchenhq.com';

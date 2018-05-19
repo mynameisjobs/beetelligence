@@ -20,7 +20,22 @@
     return docs
   }
 
-  const data = parseData();
+  function parseDetail() {
+    const now = new Date();
+    const source = 'food123';
+    const price = document.querySelector('.site-color.big-price').innerText;
+    const title = document.querySelector('h1.title').innerText;
+    const imageurl = document.querySelector('img.item-img').src;
+    const updated_at = now.toISOString();
+    const url = document.location.href.split('#')[0];
+
+    return [{ source, title, price, url, imageurl, updated_at }];
+  }
+
+  const pageUrl = document.location.href;
+  const data = pageUrl.includes('https://www.food123.com.tw/site/sku')
+    ? parseDetail()
+    : parseData()
 
   chrome.runtime.sendMessage(extension_id, { action: "postData", data: data }, (response) => {
     view.set(response.data);
