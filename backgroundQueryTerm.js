@@ -8,7 +8,7 @@
       .map(pair => {
         const searchTerm = decodeURIComponent(pair.split('=')[1]);
 
-        chrome.runtime.sendMessage({ action: 'postSearchTerm', searchTerm: searchTerm }, (response) => {
+        chrome.runtime.sendMessage({ action: 'postSearchTerm', searchTerm: searchTerm, source: 'food123' }, (response) => {
           console.log(response)
         })
       })

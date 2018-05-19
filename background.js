@@ -6,8 +6,14 @@
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({ user_id: uuidv4() }, function() {
-    console.log('Setting user_id');
+    console.log('Storing user_id');
   });
+
+  getLocation().then(position => {
+    chrome.storage.sync.set({ position }, function() {
+      console.log('Storing init location info')
+    })
+  })
 
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
@@ -33,9 +39,10 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   if(msg.action === 'postSearchTerm') {
     const request = MyRequest('/searchterms');
     const search_term = msg.searchTerm;
+    const source = msg.source;
 
     chrome.storage.sync.get('user_id', function(data) {
-      request.send({ user_id: data.user_id, search_term }, (res) => {
+      request.send({ user_id: data.user_id, search_term, source }, (res) => {
         sendResponse({ response: 'ok' })
       })
     })
@@ -59,15 +66,13 @@ chrome.runtime.onMessageExternal.addListener(function(msg, sender, sendResponse)
     const request = MyRequest('/competitors');
     const data = msg.data;
 
-    getLocation().then(position => {
-      chrome.storage.sync.get('user_id', function(store) {
-        const dataWithIDAndPosition = Array.isArray(data)
-          ? data.map(x => ({ ...x, ...position, user_id: store.user_id }))
-          : { ...data, ...position, user_id: store.user_id }
+    chrome.storage.sync.get(['user_id', 'position'], function(store) {
+      const dataWithIDAndPosition = Array.isArray(data)
+        ? data.map(x => ({ ...x, ...store.position, user_id: store.user_id }))
+        : { ...data, ...store.position, user_id: store.user_id }
 
-        request.send(dataWithIDAndPosition, (res) => {
-          sendResponse({ data: JSON.parse(res.responseText) });
-        })
+      request.send(dataWithIDAndPosition, (res) => {
+        sendResponse({ data: JSON.parse(res.responseText) });
       })
     })
 
