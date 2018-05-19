@@ -1,11 +1,10 @@
 const view = (function() {
   let _data = [];
   let _container = null;
-  init();
 
   function init() {
     _container = document.createElement('div');
-    _container.style.height = '200px';
+    _container.style.height = '210px';
     _container.style.width = '100%';
     _container.style.backgroundColor = '#ffcc01';
     _container.style.padding = '5px';
@@ -13,8 +12,13 @@ const view = (function() {
     _container.style.bottom = '0';
     _container.style['overflow'] = 'auto';
     _container.style['white-space'] = 'nowrap';
+    _container.style['z-index'] = '1000';
 
     document.body.appendChild(_container);
+  }
+
+  function remove() {
+    _container.remove();
   }
 
   function set(data) {
@@ -22,8 +26,25 @@ const view = (function() {
   }
 
   function render() {
-    //_container.appendChild(logoEle(_data.length));
+    _container.appendChild(closeBtn());
     _data.map(d => productEle(d)).forEach(ele => _container.appendChild(ele));
+  }
+
+  function closeBtn() {
+    const ele = document.createElement('div');
+    
+    ele.style.position = 'fixed';
+    ele.style.bottom = '180px';
+    ele.style.right = '10px';
+    ele.style.width = '12px';
+    ele.style.height = '12px';
+    ele.style['background-color'] = '#eee';
+    ele.style.cursor = 'pointer';
+
+    ele.innerHTML = 'X';
+    ele.addEventListener('click', remove);
+
+    return ele;
   }
 
   function logoEle(count) {
@@ -80,6 +101,8 @@ const view = (function() {
   }
 
   return {
+    init,
+    remove,
     set,
     render,
   }

@@ -39,6 +39,7 @@
     : parseData()
 
   chrome.runtime.sendMessage(extension_id, { action: "postData", data: data }, (response) => {
+    view.init();
     view.set(response.data);
     view.render();
   })
