@@ -24,8 +24,27 @@ function MyRequest(path) {
     }
   }
 
+  function sendPromise(path, data) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      
+      xhr.onreadystatechange = cb;
+      xhr.open('POST', `${REMOTE_SERVER}${path}`);
+      xhr.setRequestHeader('content-type', 'application/json');
+
+      xhr.send(JSON.stringify(data));
+
+      function cb() {
+        if(xhr.readyState === 4) {
+          resolve(JSON.parse(xhr.responseText))
+        }
+      }
+    })
+  }
+
   return {
     send,
+    sendPromise,
   }
 }
 

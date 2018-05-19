@@ -78,6 +78,20 @@ chrome.runtime.onMessageExternal.addListener(function(msg, sender, sendResponse)
 
     return true;
   }
+
+  if(msg.action === 'getDeliveredTime') {
+    const store_ids = msg.store_ids;
+
+    chrome.storage.sync.get('position', function(store) {
+      const position = store.position;
+
+      Promise.all(store_ids.map( store_id => MyRequest().sendPromise('/nexttimeslots', { store_id, ...position }) ))
+        .then(docs => sendResponse(docs) )
+        .catch(e => sendResponse([]))
+    })
+
+    return true;
+  }
   return;
 });
 

@@ -64,25 +64,37 @@ const view = (function() {
   }
 
   function productEle(data) {
+    const startDate = new Date(data.startDate);
+    const endDate = new Date(data.endDate);
+    const deliverTime = startDate.toLocaleDateString().split('/').slice(1, 3).join('/') + ' ' +startDate.getHours() + '~' + endDate.getHours() + '可送達'
+
     const ele = document.createElement('a');
     const title = document.createElement('div');
+    const deliver = document.createElement('div');
     const img = document.createElement('img');
     const price = document.createElement('div');
     title.innerHTML = data.title;
     title.style.margin = '10px 0 10px 10%';
     title.style.color = '#333';
     title.style['font-size'] = '18px';
+    deliver.innerHTML = deliverTime;
+    deliver.style.display = 'inline-block';
+    deliver.style.width = '50%';
+    deliver.style.maringLeft = '5%';
     img.style.display = 'block';
     img.style.margin = 'auto';
     img.setAttribute('src', data.imageurl);
     img.style.width = '80%';
     img.style.height = '100px';
     price.innerHTML = `$ ${data.price}`;
+    price.style.display = 'inline-block';
+    price.style.width = '35%';
     price.style.margin = '10px 0 10px 10%';
     price.style.color = 'red';
-    price.style['font-size'] = '32px';
+    price.style['font-size'] = '24px';
     price.style['font-weight'] = '800';
     ele.appendChild(price);
+    ele.appendChild(deliver);
     ele.appendChild(img);
     ele.appendChild(title);
 

@@ -38,9 +38,13 @@ function run() {
   const data = parseDetail();
 
   chrome.runtime.sendMessage(extension_id, { action: "postData", data: data }, (response) => {
-    view.init();
-    view.set(response.data);
-    view.render();
+    const store_ids = response.data.map(x => x.store_id);
+
+    chrome.runtime.sendMessage(extension_id, { action: "getDeliveredTime", store_ids }, (deliveredTimes) => {
+      view.init();
+      view.set( response.data.map((d, index) => ({...d, ...deliveredTimes[index]})) );
+      view.render();
+    })
   })
  
 }

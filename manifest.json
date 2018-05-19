@@ -1,13 +1,12 @@
 {
-  "name": "BeeCheaper",
+  "name": "BeeCheaper2",
   "version": "1.0",
   "description": "Seach products in honestBee for cheaper price!",
   "permissions": [
     "activeTab",
     "declarativeContent",
     "storage",
-    "geolocation",
-    "http://localhost:3002/"
+    "geolocation"
   ],
   "background": {
     "scripts": [
@@ -18,13 +17,7 @@
     "persistent": false
   },
   "page_action": {
-    "default_title": "beeCheaper",
-    "default_icon": {
-      "16": "images/bee.png",
-      "32": "images/bee.png",
-      "48": "images/bee.png",
-      "128": "images/bee.png"
-    }
+    "default_title": "beeCheaper"
   },
   "content_scripts": [
     {
@@ -51,14 +44,8 @@
       ]
     }
   ],
-  "icons": {
-    "16": "images/bee.png",
-    "32": "images/bee.png",
-    "48": "images/bee.png",
-    "128": "images/bee.png"
-  },
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' https://example.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://mitjobs.ianchenhq.com; object-src 'self'",
   "externally_connectable": {
     "matches": [
       "https://www.food123.com.tw/*",
