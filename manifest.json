@@ -42,7 +42,8 @@
   "content_security_policy": "script-src 'self' https://example.com; object-src 'self'",
   "externally_connectable": {
     "matches": [
-      "https://www.food123.com.tw/*"
+      "https://www.food123.com.tw/*",
+      "https://www.happy-shopping.tw/*"
     ]
   }
 }
