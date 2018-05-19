@@ -26,7 +26,7 @@
     const source = 'shopee';
     const price = document.querySelector('.shopee-product-info__header__real-price').innerText.split("-").length == 1 ? document.querySelector('.shopee-product-info__header__real-price').innerText.split("-")[0]:document.querySelector('.shopee-product-info__header__real-price').innerText.split("-")[1];
     const title = document.querySelector('h1.shopee-product-info__header__text').innerText;
-    const imageurl = document.querySelector('div._3hw5IP').style.backgroundImage.backgroundImage.match(/url\(["']?([^"']*)["']?\)/)[1];
+    const imageurl = document.querySelector('div._2yRSuO').style.backgroundImage.match(/url\(["']?([^"']*)["']?\)/)[1];
     const updated_at = now.toISOString();
     const url = document.location.href.split('#')[0];
 
