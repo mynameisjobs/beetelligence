@@ -51,7 +51,8 @@
   "externally_connectable": {
     "matches": [
       "https://www.food123.com.tw/*",
-      "https://www.happy-shopping.tw/*"
+      "https://www.happy-shopping.tw/*",
+      "https://shopee.tw/*"
     ]
   }
 }
