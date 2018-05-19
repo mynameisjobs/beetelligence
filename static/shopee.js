@@ -24,7 +24,8 @@
   function parseDetail() {
     const now = new Date();
     const source = 'shopee';
-    const price = document.querySelector('.shopee-product-info__header__real-price').innerText.split("-").length == 1 ? document.querySelector('.shopee-product-info__header__real-price').innerText.split("-")[0]:document.querySelector('.shopee-product-info__header__real-price').innerText.split("-")[1];
+    const price_str = document.querySelector('.shopee-product-info__header__real-price').innerText.split("-").length == 1 ? document.querySelector('.shopee-product-info__header__real-price').innerText.split("-")[0]:document.querySelector('.shopee-product-info__header__real-price').innerText.split("-")[1];
+    const price = price_str.replace("$","");
     const title = document.querySelector('h1.shopee-product-info__header__text').innerText;
     const imageurl = document.querySelector('div._2yRSuO').style.backgroundImage.match(/url\(["']?([^"']*)["']?\)/)[1];
     const updated_at = now.toISOString();
