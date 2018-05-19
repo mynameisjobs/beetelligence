@@ -25,7 +25,7 @@
     const now = new Date();
     const source = 'happyshopping';
     const price = document.querySelector('span.disprice').innerText;
-    const title = document.querySelector('p.prod_name').innerText;
+    const title = document.querySelector('p.prod_name').innerText.replace(/\(.*?\)/g, '');
     const imageurl = document.querySelector('div.prod_imgB > img').src;
     const updated_at = now.toISOString();
     const url = document.location.href.split('#')[0];
