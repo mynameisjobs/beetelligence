@@ -31,6 +31,7 @@
       "matches": [
         "https://www.food123.com.tw/site/sku/*",
         "https://www.happy-shopping.tw/*",
+        "https://www.momoshop.com.tw/*",
         "https://shopee.tw/*"
       ],
       "js": [
@@ -62,6 +63,7 @@
     "matches": [
       "https://www.food123.com.tw/*",
       "https://www.happy-shopping.tw/*",
+      "https://www.momoshop.com.tw/*",
       "https://shopee.tw/*"
     ]
   }
